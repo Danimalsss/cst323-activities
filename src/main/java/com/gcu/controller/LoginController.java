@@ -27,13 +27,7 @@ public class LoginController {
 	@Autowired
 	private SecurityBusinessServer security;
 
-	@GetMapping("/")
-	public String display(Model model) {
-		model.addAttribute("title", "Login Form");
-		LoginModel login = new LoginModel("User", "Pass");
-		model.addAttribute("loginModel", login);
-		return "login";
-	}
+
 
 	@PostMapping("/doLogin")
 	public String doLogin(@Valid LoginModel loginModel, BindingResult bindingResult, Model model) {
