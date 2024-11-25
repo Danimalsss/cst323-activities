@@ -17,35 +17,31 @@ public class OrdersDataService implements DataAccessInterface<OrderModel> {
 	@Autowired
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplateObject;
-		
-	
+
 	public OrdersDataService(DataSource dataSource) {
-        this.dataSource = dataSource;
-        this.jdbcTemplateObject = new JdbcTemplate(dataSource);
-    }
+		this.dataSource = dataSource;
+		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
+	}
 
 	@Override
-    public List<OrderModel> findAll() {
-        String sql = "SELECT * FROM ORDERS";
-        List<OrderModel> orders = new ArrayList<OrderModel>();
+	public List<OrderModel> findAll() {
+		String sql = "SELECT * FROM ORDERS";
+		List<OrderModel> orders = new ArrayList<OrderModel>();
 
-        try {
-            SqlRowSet srs = jdbcTemplateObject.queryForRowSet(sql);
+		try {
+			SqlRowSet srs = jdbcTemplateObject.queryForRowSet(sql);
 
-            while (srs.next()) {
-                orders.add(new OrderModel(srs.getLong("ID"),
-                        srs.getString("ORDER_NO"),
-                        srs.getString("PRODUCT_NAME"),
-                        srs.getFloat("PRICE"),
-                        srs.getInt("QUANTITY")));
-            }
-        } catch (Exception e) {
-            // Handle exceptions appropriately
-            e.printStackTrace();
-        }
+			while (srs.next()) {
+				orders.add(new OrderModel(srs.getLong("ID"), srs.getString("ORDER_NO"), srs.getString("PRODUCT_NAME"),
+						srs.getFloat("PRICE"), srs.getInt("QUANTITY")));
+			}
+		} catch (Exception e) {
+			// Handle exceptions appropriately
+			e.printStackTrace();
+		}
 
-        return orders;
-    }
+		return orders;
+	}
 
 	@Override
 	public OrderModel findById(int id) {
@@ -55,24 +51,21 @@ public class OrdersDataService implements DataAccessInterface<OrderModel> {
 
 	@Override
 	public boolean create(OrderModel order) {
-        String sql = "INSERT INTO ORDERS(ORDER_NO, PRODUCT_NAME, PRICE, QUANTITY) VALUES(?, ?, ?, ?)";
-        int rows = 0;
+		String sql = "INSERT INTO ORDERS(ORDER_NO, PRODUCT_NAME, PRICE, QUANTITY) VALUES(?, ?, ?, ?)";
+		int rows = 0;
 
-        try {
-            rows = jdbcTemplateObject.update(sql, 
-            					order.getOrderNo(), 
-            					order.getProductName(), 
-            					order.getPrice(), 
-            					order.getQuantity());
-            
-            return rows == 1 ? true : false;
-        } catch (Exception e) {
-            // Handle exceptions appropriately
-            e.printStackTrace();
-        }
+		try {
+			rows = jdbcTemplateObject.update(sql, order.getOrderNo(), order.getProductName(), order.getPrice(),
+					order.getQuantity());
 
-        return false;
-    }
+			return rows == 1 ? true : false;
+		} catch (Exception e) {
+			// Handle exceptions appropriately
+			e.printStackTrace();
+		}
+
+		return false;
+	}
 
 	@Override
 	public boolean update(OrderModel t) {

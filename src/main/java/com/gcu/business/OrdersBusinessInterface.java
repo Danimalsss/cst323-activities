@@ -6,7 +6,10 @@ import com.gcu.model.OrderModel;
 
 public interface OrdersBusinessInterface {
 	void test();
+
 	List<OrderModel> getOrders();
+
 	void init();
-    void destroy();
+
+	void destroy();
 }

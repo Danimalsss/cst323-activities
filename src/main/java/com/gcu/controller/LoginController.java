@@ -21,36 +21,36 @@ import java.util.List;
 @RequestMapping("/login")
 public class LoginController {
 
-    @Autowired
-    private OrdersBusinessInterface service;
-    
-    @Autowired
-    private SecurityBusinessServer security;
+	@Autowired
+	private OrdersBusinessInterface service;
 
-    @GetMapping("/")
-    public String display(Model model) {
-        model.addAttribute("title", "Login Form");
-        LoginModel login = new LoginModel("User", "Pass");
-        model.addAttribute("loginModel", login);
-        return "login";
-    }
+	@Autowired
+	private SecurityBusinessServer security;
 
-    @PostMapping("/doLogin")
-    public String doLogin(@Valid LoginModel loginModel, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("title", "Login Form");
-            return "login";
-        }
+	@GetMapping("/")
+	public String display(Model model) {
+		model.addAttribute("title", "Login Form");
+		LoginModel login = new LoginModel("User", "Pass");
+		model.addAttribute("loginModel", login);
+		return "login";
+	}
 
-        // Call the test() method 
-        service.test();
-        
-        security.authenticate("user", "pass");	
+	@PostMapping("/doLogin")
+	public String doLogin(@Valid LoginModel loginModel, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("title", "Login Form");
+			return "login";
+		}
 
-        List<OrderModel> orders = service.getOrders();
-        model.addAttribute("title", "My Orders");
-        model.addAttribute("orders", orders);
+		// Call the test() method
+		service.test();
 
-        return "orders";
-    }
+		security.authenticate("user", "pass");
+
+		List<OrderModel> orders = service.getOrders();
+		model.addAttribute("title", "My Orders");
+		model.addAttribute("orders", orders);
+
+		return "orders";
+	}
 }

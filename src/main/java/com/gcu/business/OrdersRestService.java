@@ -16,14 +16,14 @@ import com.gcu.model.OrderModel;
 public class OrdersRestService {
 	@Autowired
 	private OrdersBusinessInterface service;
-	
-	@GetMapping(path="/getjson", produces= {MediaType.APPLICATION_JSON_VALUE})
-	public List<OrderModel> getOrdersAsJson(){
+
+	@GetMapping(path = "/getjson", produces = { MediaType.APPLICATION_JSON_VALUE })
+	public List<OrderModel> getOrdersAsJson() {
 		return service.getOrders();
 	}
-	
-	@GetMapping(path="/getxml", produces={MediaType.APPLICATION_XML_VALUE})
-	public OrderList getOrdersAsXml(){
+
+	@GetMapping(path = "/getxml", produces = { MediaType.APPLICATION_XML_VALUE })
+	public OrderList getOrdersAsXml() {
 		OrderList list = new OrderList();
 		list.setOrders(service.getOrders());
 		return list;

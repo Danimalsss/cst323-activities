@@ -14,9 +14,9 @@ import com.gcu.business.AnotherBusinessService;
 @Configuration
 public class SpringConfig {
 
-	@Bean(name = "orderBusinessService", initMethod="init", destroyMethod="destroy")
+	@Bean(name = "orderBusinessService", initMethod = "init", destroyMethod = "destroy")
 	public OrdersBusinessInterface getOrdersBusiness() {
-        return new OrderBusinessService();
-    }
+		return new OrderBusinessService();
+	}
 
 }

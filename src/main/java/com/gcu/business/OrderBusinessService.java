@@ -14,8 +14,8 @@ import com.gcu.model.OrderModel;
 public class OrderBusinessService implements OrdersBusinessInterface {
 
 	@Autowired
-    private DataAccessInterface<OrderModel> service;
-	
+	private DataAccessInterface<OrderModel> service;
+
 	@Override
 	public void test() {
 		// TODO Auto-generated method stub
@@ -24,20 +24,20 @@ public class OrderBusinessService implements OrdersBusinessInterface {
 	}
 
 	@Override
-    public List<OrderModel> getOrders() {
+	public List<OrderModel> getOrders() {
 		return service.findAll();
 
-    }
-	
+	}
+
 	@PostConstruct
 	@Override
 	public void init() {
-        System.out.println("OrdersBusinessService initialized");
-    }
-	
+		System.out.println("OrdersBusinessService initialized");
+	}
+
 	@PreDestroy
 	@Override
-    public void destroy() {
-        System.out.println("OrdersBusinessService destroyed");
-    }
+	public void destroy() {
+		System.out.println("OrdersBusinessService destroyed");
+	}
 }
