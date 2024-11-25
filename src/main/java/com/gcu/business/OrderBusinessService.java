@@ -3,8 +3,6 @@ package com.gcu.business;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -29,13 +27,13 @@ public class OrderBusinessService implements OrdersBusinessInterface {
 
 	}
 
-	@PostConstruct
+	@jakarta.annotation.PostConstruct
 	@Override
 	public void init() {
 		System.out.println("OrdersBusinessService initialized");
 	}
 
-	@PreDestroy
+	@jakarta.annotation.PreDestroy
 	@Override
 	public void destroy() {
 		System.out.println("OrdersBusinessService destroyed");
